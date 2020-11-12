@@ -16,6 +16,10 @@ class ThoughtsController < ApplicationController
     end
   end
 
+  def show
+    @thought = Thought.find(params[:id])
+  end
+
 private
 
   def thought_params
