@@ -10,6 +10,18 @@
   </head>
 
   <body>
+    <h1><%= link_to "ThoughtApp", root_path, class: :logo %></h1>
+            <div class="nav__right"> 
+            <% if user_signed_in? %>
+              <%= link_to "ログアウト", destroy_user_session_path, class: :nav__logout, method: :delete %>
+              <%= link_to "新規投稿", new_thought_path, class: :nav__btn %>
+            </div>
+            <% else %>
+            <div class="nav__right">
+              <%= link_to "ログイン", new_user_session_path, class: :nav__btn %>
+              <%= link_to "新規登録", new_user_registration_path, class: :nav__btn %>
+            </div>
+            <% end %>
     <%= yield %>
   </body>
 </html>
