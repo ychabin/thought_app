@@ -4,50 +4,54 @@
 | ------------------ | ------ | ----------- |
 | email              | string | null: false |
 | password           | string | null: false |
-| nickname           | string | null: false |
-| profile            | text   | null: false |
+| name               | string | null: false |
 
-has_many items
-has_many orders
+has_many :thoughts
+has_many :comments
 
-## items テーブル
+## thought テーブル
 
 | Column             | Type       | Options            |
 | ------------------ | ---------- | ------------------ |
-| name               | string     | null: false        |
-| text               | text       | null: false        |
-| price              | integer    | null: false        |
-| condition_id       | integer    | null: false        |
-| shipping_cost_id   | integer    | null: false        |
-| shipment_source_id | integer    | null: false        |
-| shipping_day_id    | integer    | null: false        |
-| category_id        | integer    | null: false        |
+| title              | string     | null: false        |
+| content            | text       | null: false        |
 | user               | references | foreign_key: true  |
 
-belongs_to user
-has_one order
+belongs_to :user
+has_many :comments
 
-## orders テーブル
+## comments テーブル
 
 | Column      | Type       | Options           |
 | ----------- | ---------- | ----------------- |
+| content     | text       | null: false       |
 | user        | references | foreign_key: true |
 | item        | references | foreign_key: true |
 
-belongs_to user
-belongs_to item
-has_one address
+belongs_to :user
+belongs_to :item
+has_many :comment_goods
+has_many :goods, through: :comment_goods
 
-## addresses テーブル
+## goods テーブル
 
 | Column        | Type       | Options           |
 | ------------- | ---------- | ----------------- |
-| post_num      | string     | null: false       |
-| prefecture_id | integer    | null: false       |
-| city          | string     | null: false       |
-| house_num     | string     | null: false       |
-| building_name | string     |                   |
-| phone_num     | string     | null: false       |
-| order         | references | foreign_key: true |
+| user          | references | foreign_key: true |
+| thought       | references | foreign_key: true |
+| comment       | references | foreign_key: true |
 
-belongs_to order
+belongs_to :user
+belongs_to :comment
+has_many :comment_goods
+has_many :comments, through: :comment_goods
+
+## comment_goods テーブル
+
+| Column        | Type       | Options           |
+| ------------- | ---------- | ----------------- |
+| comment       | references | foreign_key: true |
+| good          | references | foreign_key: true |
+
+belongs_to :comment
+belongs_to :good
