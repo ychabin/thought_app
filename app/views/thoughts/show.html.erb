@@ -7,7 +7,7 @@
       <%= link_to "#{@thought.user.name}の考察", user_path(@thought.user_id), class: :thought__user %>
       <% if user_signed_in? && current_user.id == @thought.user_id%>
         <div class="thought_manage">
-          <%= link_to "編集する", "#", class: :thought__btn %>
+          <%= link_to "編集する", edit_thought_path, class: :thought__btn %>
           <%= link_to "削除する", thought_path, class: :thought__btn, method: :delete %>
         </div>
         <% end %>
