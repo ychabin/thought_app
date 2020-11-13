@@ -1,5 +1,5 @@
 <div class="card__body">
-    <%= link_to thought.title, thoughts_path(thought.id), class: :card__title%>
+    <%= link_to thought.title, thought_path(thought.id), class: :card__title%>
     
-    <%= link_to "by#{thought.user.name}", "#", class: :card__user %>
+    <%= link_to "by#{thought.user.name}", user_path(thought.user), class: :card__user %>
 </div>
