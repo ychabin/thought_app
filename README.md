@@ -24,7 +24,7 @@ has_many :comments
 
 | Column      | Type       | Options           |
 | ----------- | ---------- | ----------------- |
-| content     | text       | null: false       |
+| comment     | text       | null: false       |
 | user        | references | foreign_key: true |
 | item        | references | foreign_key: true |
 

@@ -18,6 +18,8 @@ class ThoughtsController < ApplicationController
 
   def show
     @thought = Thought.find(params[:id])
+    @comment = Comment.new
+    @comments = @thought.comments.includes(:user)
   end
 
   def destroy
